@@ -1,19 +1,23 @@
-<<<<<<< HEAD
-import javax.swing.JFrame;
-=======
-import java.util.Arrays;
->>>>>>> 268bea94d84901a3780729d8977d35de1d8212d9
 
+import javax.swing.JFrame;
+import java.util.Arrays;
 public class main {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
+
 		
 		JFrame ventana1 = new JFrame();
 		ventana1.setSize(400,550);
 		ventana1.setTitle("Verificador de Sudoku");
 		ventana1.setResizable(false);
 		ventana1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+        Sudoku s = new Sudoku();
+		
+		s.resolver();
+		
+		s.mostrar();
+		
 		
         funcion(ventana1);
 	
@@ -27,22 +31,22 @@ public class main {
 	public static void funcion(JFrame ventana1) {
 		
 		interfaz window = new interfaz();
-		ventana1.add(window.getPanel());
+		ventana1.add(window.getPanel1());
 		
 		ventana1.setVisible(true);
 		
-		while(!window.getPermiso()) {
+		while(!window.getPermiso1()) {
 			
-			System.out.println(".");
+		System.out.println(".");
 			
 		}
 		
 		interfaz2 window2 = new interfaz2();
-		ventana1.add(window2.getPanel());
+		ventana1.add(window2.getPanel2());
 		
 		ventana1.setVisible(true);
 		
-        while(!window2.getPermiso()) {
+        while(!window2.getPermiso2()) {
 			
 			System.out.println(".");
 			
@@ -51,19 +55,9 @@ public class main {
         funcion(ventana1);
 		
 	}
-	
-	
-	
+		
+}
 	
 
-=======
-		// TODO Auto-generated method stub
-		Sudoku s = new Sudoku();
-		
-		s.resolver();
-		
-		s.mostrar();
-	}
-	
->>>>>>> 268bea94d84901a3780729d8977d35de1d8212d9
-}
+
+

@@ -54,11 +54,11 @@ public class interfaz2 {
 		
 	}
 	
-	public JPanel getPanel() {
+	public JPanel getPanel2() {
 		return panel;
 	}
 	
-	public boolean getPermiso() {
+	public boolean getPermiso2() {
 		return permiso;
 	}
 }

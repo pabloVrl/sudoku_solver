@@ -60,10 +60,10 @@ public class interfaz{
 			
 	}
 	
-	public JPanel getPanel() {
+	public JPanel getPanel1() {
 		return panel;
 	}
-	public boolean getPermiso() {
+	public boolean getPermiso1() {
 		return permiso;
 	}
 	
