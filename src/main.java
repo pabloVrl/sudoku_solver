@@ -5,6 +5,7 @@ public class main {
 
 	public static void main(String[] args) {
 
+<<<<<<< HEAD
 		
 		JFrame ventana1 = new JFrame();
 		ventana1.setSize(800,550);
@@ -31,6 +32,9 @@ public class main {
 	}
 	
 	
+=======
+	}
+>>>>>>> 49c191577bad3d5655b58547737b2378af5a4d60
 		
 }
 	

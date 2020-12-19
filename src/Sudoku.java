@@ -2,20 +2,24 @@ import java.util.Arrays;
 
 public class Sudoku {
 	//private int[][] tablero = new int[9][9];
-	public int[][] tablero = {{0, 0, 0, 0, 0, 0, 0, 0, 0},
+	public int[][] tablero = {{9, 0, 0, 0, 0, 0, 0, 0, 0},
 							   {0, 0, 0, 0, 0, 0, 0, 0, 0},
 	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
 	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
+	                           {0, 0, 0, 0, 9, 0, 0, 0, 0},
 	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
+	                           {0, 5, 0, 0, 0, 0, 0, 0, 0},
 	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
 	                           {0, 0, 0, 0, 0, 0, 0, 0, 0}};
 	
 	private int posiblesNumeros[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 	
-	public Sudoku() {
-		
+	public Sudoku(int tablero[][]) {
+		for(int i = 0; i < 9;i++) {
+			for(int j = 0; j < 9;j++) {
+				this.tablero[i][j] = tablero[i][j];
+			}
+		}
 	}
 	
 	public void mostrar() {
@@ -78,7 +82,7 @@ public class Sudoku {
 		// si disponible es null significa que se terminó de resolver el sudoku correctamente
 		int termino[] = {-1, -1};
 		if(Arrays.equals(disponible, termino)) {
-			System.out.println("TERMINADOOOOOOOOOOOOOOOOO");
+			System.out.println("TERMINADO");
 			return true;
 		}
 		
