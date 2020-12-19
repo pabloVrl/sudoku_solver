@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import javax.swing.JFrame;
+=======
+import java.util.Arrays;
+>>>>>>> 268bea94d84901a3780729d8977d35de1d8212d9
 
 public class main {
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		
 		JFrame ventana1 = new JFrame();
 		ventana1.setSize(400,550);
@@ -51,4 +56,14 @@ public class main {
 	
 	
 
+=======
+		// TODO Auto-generated method stub
+		Sudoku s = new Sudoku();
+		
+		s.resolver();
+		
+		s.mostrar();
+	}
+	
+>>>>>>> 268bea94d84901a3780729d8977d35de1d8212d9
 }
