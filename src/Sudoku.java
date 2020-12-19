@@ -1,16 +1,7 @@
 import java.util.Arrays;
 
 public class Sudoku {
-	//private int[][] tablero = new int[9][9];
-	public int[][] tablero = {{9, 0, 0, 0, 0, 0, 0, 0, 0},
-							   {0, 0, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 9, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 5, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 0, 0, 0, 0, 0},
-	                           {0, 0, 0, 0, 0, 0, 0, 0, 0}};
+	public int[][] tablero = new int[9][9];
 	
 	private int posiblesNumeros[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 	
@@ -32,7 +23,7 @@ public class Sudoku {
 	}
 	
 	private int[] encontrarDisponible() {
-		
+		System.out.println("ENTREEEE");
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
 				if (tablero[i][j] == 0) {
@@ -41,6 +32,7 @@ public class Sudoku {
 				}
 			}
 		}
+		
 		int[] disponible = new int[] {-1, -1};
 		return disponible;
 	}
@@ -102,4 +94,5 @@ public class Sudoku {
 		
 		return false;
 	}
+	
 }

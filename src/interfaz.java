@@ -1,8 +1,10 @@
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -67,6 +69,7 @@ public class interfaz{
         respuesta.setEditable(false);
 		respuesta.setFont(new Font("", Font.BOLD, 29));
 		respuesta.setBackground(fondo);
+		respuesta.setLineWrap(true);
 		
 		
 		reset = new JButton("LIMPIAR");
@@ -90,8 +93,48 @@ public class interfaz{
 			
 			public void actionPerformed(ActionEvent e) {
 				
+				Sudoku s = getTablero();
+				int cont = 0;
+				for(int i = 0; i < 9; i++) {
+					for(int j = 0; j < 9; j++) {
+						if(s.tablero[i][j] != 0) {
+							cont++;
+						}
+					}
+				}
+				
+				if(cont == 81) {
+					respuesta.setText("   EL SUDOKU \n    NO TIENE \n   SOLUCIÓN");
+				}
+				else {
+					System.out.println(s.resolver());
+					String sudoku = "";
+
+					for(int i = 0; i < 9; i++) {
+						for(int j = 0; j < 9; j++) {
+							sudoku += s.tablero[i][j];
+							sudoku += " ";
+						}
+					}
+					
+					
+
+					System.out.println(sudoku);
+
+					respuesta.setText(sudoku);
+				}
+
+			}
+			
+		});
+	    
+	    reset.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
 				
 				
+				ingresar_matriz.setText("");
+				respuesta.setText("");
 		
 			}
 			
@@ -102,6 +145,32 @@ public class interfaz{
 	
 	public JPanel getPanel1() {
 		return panel;
+	}
+	
+	private Sudoku getTablero() {
+		String tablero = ingresar_matriz.getText();
+		tablero = tablero.replace(" ", "");
+		tablero = tablero.replace("\n", "");
+		
+		int sudoku[][] = new int[9][9];
+		int cont = 0;
+		for(int i = 0; i < 9; i++) {
+			for(int j = 0; j < 9; j++) {
+				sudoku[i][j] = Character.getNumericValue(tablero.charAt(cont));
+				cont++;
+			}
+		}
+		
+//		for(int i = 0; i < 9; i++) {
+//			for(int j = 0; j < 9; j++) {
+//				System.out.print(sudoku[i][j]);
+//			}
+//			System.out.println();
+//		}
+//		
+		Sudoku s = new Sudoku(sudoku);
+		
+		return s;
 	}
 	
 }
