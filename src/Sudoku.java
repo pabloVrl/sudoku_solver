@@ -83,7 +83,7 @@ public class Sudoku {
 			if(esValido(numPosible, disponible)) {
 				// si el numero que probamos es valido, lo ponemos en el tablero
 				tablero[fila][colu] = numPosible;
-				// llamos a la funcion recursivamente
+				// llamamos a la funcion recursivamente
 				if(resolver()) {
 					return true;
 				}

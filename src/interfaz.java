@@ -1,16 +1,21 @@
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
+
+
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 
 public class interfaz{
@@ -24,6 +29,10 @@ public class interfaz{
  private JButton resolver;
  private JButton reset;
  private final Color fondo = new Color(200, 218, 211);
+ private AudioInputStream sonido1;
+ private AudioInputStream sonido2;
+ private Clip clip1;
+ private Clip clip2;
  
  
 	public interfaz() {
@@ -38,14 +47,14 @@ public class interfaz{
 		titulo.setFont(new Font("", Font.BOLD, 22));
 		
 		ingresar_matriz = new JTextArea();
-		ingresar_matriz.setBounds(80, 80, 220, 350);
+		ingresar_matriz.setBounds(90, 80, 220, 350);
 		ingresar_matriz.setEditable(true);
 		ingresar_matriz.setLineWrap(true);
 		ingresar_matriz.setFont(new Font("", Font.BOLD,29));
 		ingresar_matriz.setBackground(fondo);
 		
 		resolver = new JButton("RESOLVER");
-		resolver.setBounds(120, 450, 120, 40);
+		resolver.setBounds(135, 450, 120, 40);
 		resolver.setBorderPainted(true);
 		resolver.setFocusPainted(false);
 		resolver.setContentAreaFilled(true);
@@ -89,12 +98,13 @@ public class interfaz{
 		panel.add(respuesta);
 		panel.add(reset);
 		
+		//ACCIÓN BOTON1
 	    resolver.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
+			 public void actionPerformed(ActionEvent e) {
 				
+				sonidoboton1();
 				Sudoku s = getTablero();
-				int cont = 0;
+								int cont = 0;
 				for(int i = 0; i < 9; i++) {
 					for(int j = 0; j < 9; j++) {
 						if(s.tablero[i][j] != 0) {
@@ -104,7 +114,7 @@ public class interfaz{
 				}
 				
 				if(cont == 81) {
-					respuesta.setText("   EL SUDOKU \n    NO TIENE \n   SOLUCIÓN");
+					respuesta.setText("  \n\n\n  EL SUDOKU \n    NO TIENE \n   SOLUCIÓN");
 				}
 				else {
 					System.out.println(s.resolver());
@@ -118,35 +128,95 @@ public class interfaz{
 					}
 					
 					
-
-					System.out.println(sudoku);
+                    System.out.println(sudoku);
 
 					respuesta.setText(sudoku);
 				}
 
 			}
+			 
+			 
+			 
+			 
+	
 			
 		});
+	     //ACCIÓN HOVER BOTON1
+	    resolver.addMouseListener(new java.awt.event.MouseAdapter() {
+	        public void mouseEntered(java.awt.event.MouseEvent evt) {
+	            resolver.setBackground(new Color(147, 181, 179));
+	        }
+	        public void mouseExited(java.awt.event.MouseEvent evt) {
+	            resolver.setBackground(Color.WHITE);
+	        }
+	    });
 	    
+	    
+	    //ACCIÓN CLICK BOTON2
 	    reset.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				sonidoboton2();
 				ingresar_matriz.setText("");
 				respuesta.setText("");
+				
+
 		
 			}
 			
 		});
+	    //ACCIÓN HOVER BOTON2
+	    reset.addMouseListener(new java.awt.event.MouseAdapter() {
+	        public void mouseEntered(java.awt.event.MouseEvent evt) {
+	            reset.setBackground(new Color(147, 181, 179));
+	        }
+	        public void mouseExited(java.awt.event.MouseEvent evt) {
+	            reset.setBackground(Color.WHITE);
+	        }
+	    });
 		
 			
 	}
-	
+	//MOSTRAR PANEL MAIN
 	public JPanel getPanel1() {
 		return panel;
 	}
 	
+	//SONIDO BOTON1
+	public void sonidoboton1()
+    {
+      try 
+      {
+       sonido1 = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("audio1.wav"));
+       clip1 = AudioSystem.getClip();
+       clip1.open(sonido1);
+      }
+      catch(Exception ex)
+      {
+        
+      }
+      clip1.setFramePosition(0);
+      clip1.start();
+    }
+
+	 //SONIDO BOTON2
+     public void sonidoboton2()
+	    {
+	      try 
+	      {
+	       sonido2 = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("audio2.wav"));
+	       clip2 = AudioSystem.getClip();
+	       clip2.open(sonido2);
+	      }
+	      catch(Exception ex)
+	      {
+	        
+	      }
+	      clip2.setFramePosition(0);
+	      clip2.start();
+	    }
+	//PASAR TABLERO A MATRIZ
 	private Sudoku getTablero() {
 		String tablero = ingresar_matriz.getText();
 		tablero = tablero.replace(" ", "");
