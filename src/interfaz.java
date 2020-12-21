@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
-
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -29,11 +29,10 @@ public class interfaz{
  private JButton resolver;
  private JButton reset;
  private final Color fondo = new Color(200, 218, 211);
- private AudioInputStream sonido1;
- private AudioInputStream sonido2;
- private Clip clip1;
- private Clip clip2;
+ URL sonido1,sonido2;
  
+
+
  
 	public interfaz() {
 		
@@ -104,7 +103,8 @@ public class interfaz{
 				
 				sonidoboton1();
 				Sudoku s = getTablero();
-								int cont = 0;
+			 int cont = 0;
+			 
 				for(int i = 0; i < 9; i++) {
 					for(int j = 0; j < 9; j++) {
 						if(s.tablero[i][j] != 0) {
@@ -186,36 +186,42 @@ public class interfaz{
 	//SONIDO BOTON1
 	public void sonidoboton1()
     {
-      try 
-      {
-       sonido1 = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("audio1.wav"));
-       clip1 = AudioSystem.getClip();
-       clip1.open(sonido1);
-      }
-      catch(Exception ex)
-      {
-        
-      }
-      clip1.setFramePosition(0);
-      clip1.start();
+		
+	   sonido1 = getClass().getResource("audio1.wav");
+        try 
+        {
+    	 AudioInputStream sound1 = AudioSystem.getAudioInputStream(sonido1);
+ 		 Clip clip1 = AudioSystem.getClip();
+ 	     clip1.open(sound1);
+ 	     clip1.start();
+        }
+        catch(Exception e)
+        {  
+    	 System.out.println("" + e);
+        }
+      
+      
     }
 
 	 //SONIDO BOTON2
      public void sonidoboton2()
 	    {
-	      try 
-	      {
-	       sonido2 = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("audio2.wav"));
-	       clip2 = AudioSystem.getClip();
-	       clip2.open(sonido2);
-	      }
-	      catch(Exception ex)
-	      {
-	        
-	      }
-	      clip2.setFramePosition(0);
-	      clip2.start();
+    	 
+    	 sonido2 = getClass().getResource("audio2.wav");
+    	 try {
+            
+    		 AudioInputStream sound2 = AudioSystem.getAudioInputStream(sonido2);
+    		 Clip clip2 = AudioSystem.getClip();
+    	     clip2.open(sound2);
+    	     clip2.start();
+             
+           
+         } catch (Exception e) {
+             System.out.println("" + e);
+         }
+	      
 	    }
+     
 	//PASAR TABLERO A MATRIZ
 	private Sudoku getTablero() {
 		String tablero = ingresar_matriz.getText();
