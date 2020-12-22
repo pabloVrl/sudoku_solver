@@ -73,7 +73,7 @@ public class Sudoku {
 		// si disponible es null significa que se terminó de resolver el sudoku correctamente
 		int termino[] = {-1, -1};
 		if(Arrays.equals(disponible, termino)) {
-			System.out.println("TERMINADO");
+			System.out.println("SUDOKU RESUELTO");
 			return true;
 		}
 		

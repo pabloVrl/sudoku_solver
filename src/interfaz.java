@@ -127,10 +127,6 @@ public class interfaz{
 								 sudoku += " ";
 							 }
 						 }
-	
-	
-						 System.out.println(sudoku);
-	
 						 respuesta.setText(sudoku);
 					 }
 					 else {
