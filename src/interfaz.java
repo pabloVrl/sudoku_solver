@@ -26,6 +26,7 @@ public class interfaz{
  private JTextArea linea;
  private JTextArea ingresar_matriz;
  private JTextArea respuesta;
+ private JTextArea contorno;
  private JButton resolver;
  private JButton reset;
  private final Color fondo = new Color(200, 218, 211);
@@ -38,7 +39,7 @@ public class interfaz{
 		
 		panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBackground(fondo);
+		panel.setBackground(new Color(147, 181, 179));
 		
 		//VENTANA1
 		titulo = new JLabel("INGRESE LA BASE DEL SUDOKU");
@@ -59,6 +60,13 @@ public class interfaz{
 		resolver.setContentAreaFilled(true);
 		resolver.setBackground(Color.white);
 		
+		//CONTORNO
+		contorno = new JTextArea();
+		contorno.setEditable(false);
+		contorno.setBounds(10,10,765,490);
+		contorno.setBackground(fondo);
+		
+		
 		//LINEA
 		linea = new JTextArea();
 		linea.setEditable(false);
@@ -69,7 +77,7 @@ public class interfaz{
 		//VENTANA2
 		
 		titulo2 = new JLabel("SOLUCIÓN");
-		titulo2.setBounds(530, 35,300 , 22);
+		titulo2.setBounds(535, 35,300 , 22);
 		titulo2.setFont(new Font("", Font.BOLD, 20));
 		
         respuesta = new JTextArea();
@@ -96,6 +104,7 @@ public class interfaz{
 		panel.add(titulo2);
 		panel.add(respuesta);
 		panel.add(reset);
+		panel.add(contorno);
 		
 		//ACCIÓN BOTON1
 	    resolver.addActionListener(new ActionListener() {
@@ -142,6 +151,8 @@ public class interfaz{
 	
 			
 		});
+	    
+	  
 	     //ACCIÓN HOVER BOTON1
 	    resolver.addMouseListener(new java.awt.event.MouseAdapter() {
 	        public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -188,7 +199,7 @@ public class interfaz{
 	public void sonidoboton1()
     {
 		
-	   sonido1 = getClass().getResource("audio1.wav");
+	   sonido1 = getClass().getResource("audio.wav");
         try 
         {
     	 AudioInputStream sound1 = AudioSystem.getAudioInputStream(sonido1);
@@ -208,7 +219,7 @@ public class interfaz{
      public void sonidoboton2()
 	    {
     	 
-    	 sonido2 = getClass().getResource("audio2.wav");
+    	 sonido2 = getClass().getResource("audio.wav");
     	 try {
             
     		 AudioInputStream sound2 = AudioSystem.getAudioInputStream(sonido2);
@@ -297,5 +308,7 @@ public class interfaz{
 		
 		return true;
 	}
+	
+    
 	
 }
