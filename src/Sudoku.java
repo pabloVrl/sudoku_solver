@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class Sudoku {
 	public int[][] tablero = new int[9][9];
 	
-	private int posiblesNumeros[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	public static int posiblesNumeros[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 	
 	public Sudoku(int tablero[][]) {
 		for(int i = 0; i < 9;i++) {
@@ -23,7 +23,6 @@ public class Sudoku {
 	}
 	
 	private int[] encontrarDisponible() {
-		System.out.println("ENTREEEE");
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
 				if (tablero[i][j] == 0) {

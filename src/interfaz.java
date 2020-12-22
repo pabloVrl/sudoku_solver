@@ -101,39 +101,44 @@ public class interfaz{
 	    resolver.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent e) {
 				
-				sonidoboton1();
-				Sudoku s = getTablero();
-			 int cont = 0;
-			 
-				for(int i = 0; i < 9; i++) {
-					for(int j = 0; j < 9; j++) {
-						if(s.tablero[i][j] != 0) {
-							cont++;
-						}
-					}
-				}
-				
-				if(cont == 81) {
-					respuesta.setText("  \n\n\n  EL SUDOKU \n    NO TIENE \n   SOLUCIÓN");
-				}
-				else {
-					System.out.println(s.resolver());
-					String sudoku = "";
+				 sonidoboton1();
 
-					for(int i = 0; i < 9; i++) {
-						for(int j = 0; j < 9; j++) {
-							sudoku += s.tablero[i][j];
-							sudoku += " ";
-						}
-					}
-					
-					
-                    System.out.println(sudoku);
+				 Sudoku s = getTablero();
+				 if(s == null) {
+					 respuesta.setText("  \n\n\n  EL SUDOKU \n          ES\n    INVALIDO");
+				 }
+				 else {
+					 int cont = 0;
 
-					respuesta.setText(sudoku);
-				}
+					 for(int i = 0; i < 9; i++) {
+						 for(int j = 0; j < 9; j++) {
+							 if(s.tablero[i][j] != 0) {
+								 cont++;
+							 }
+						 }
+					 }
 
-			}
+					 if (s.resolver()) {
+						 String sudoku = "";
+	
+						 for(int i = 0; i < 9; i++) {
+							 for(int j = 0; j < 9; j++) {
+								 sudoku += s.tablero[i][j];
+								 sudoku += " ";
+							 }
+						 }
+	
+	
+						 System.out.println(sudoku);
+	
+						 respuesta.setText(sudoku);
+					 }
+					 else {
+						 respuesta.setText("NO TIENE SOLUCION");
+					 }
+				 }
+
+			 }
 			 
 			 
 			 
@@ -228,25 +233,73 @@ public class interfaz{
 		tablero = tablero.replace(" ", "");
 		tablero = tablero.replace("\n", "");
 		
-		int sudoku[][] = new int[9][9];
-		int cont = 0;
+		if(tablero.length() < 81) {
+			respuesta.setText("  \n\n\n  EL SUDOKU \n        ESTÁ\n INCOMPLETO");
+			return null;
+		}
+		else {
+			int sudoku[][] = new int[9][9];
+			int cont = 0;
+			for(int i = 0; i < 9; i++) {
+				for(int j = 0; j < 9; j++) {
+					sudoku[i][j] = Character.getNumericValue(tablero.charAt(cont));
+					cont++;
+				}
+			}
+			
+			Sudoku s = new Sudoku(sudoku);
+			
+			if(!verificarSudoku(s)) {
+				return null;
+			}
+			
+			return s;
+			
+		}
+		
+		
+
+	}
+	
+	private boolean verificarSudoku(Sudoku s) {
+		// ciclo para verificar que no hayan errores en la base del sudoku
 		for(int i = 0; i < 9; i++) {
 			for(int j = 0; j < 9; j++) {
-				sudoku[i][j] = Character.getNumericValue(tablero.charAt(cont));
-				cont++;
+				int actual = s.tablero[i][j];
+				if( actual != 0) {
+					// verificar si esta en la misma fila
+					for(int n = 0; n < 9; n++) {
+						if(s.tablero[i][n] == actual && n!=j) {
+							System.out.println("MISMA FILA");
+							return false;
+						}
+					}
+					// verificar si esta en la misma columna
+					for(int n = 0; n < 9; n++) {
+						if(actual == s.tablero[n][j] && n!=i) {
+							System.out.println("misma columna");
+							return false;
+						}
+					}
+					// verificar si esta en el mismo cuadrante
+					int inicioFila = (i / 3) * 3;
+					int inicioColu = (j / 3) * 3;
+					int count = 0;
+					for(int f = inicioFila; f < inicioFila + 3; f++) {
+						for(int c = inicioColu; c < inicioColu + 3; c++) {
+							if(actual == s.tablero[f][c])
+								count += 1;
+								if(count == 2) {
+									System.out.println("MISMO CUADRANTE");
+									return false;
+								}
+						}
+					}
+				}
 			}
 		}
 		
-//		for(int i = 0; i < 9; i++) {
-//			for(int j = 0; j < 9; j++) {
-//				System.out.print(sudoku[i][j]);
-//			}
-//			System.out.println();
-//		}
-//		
-		Sudoku s = new Sudoku(sudoku);
-		
-		return s;
+		return true;
 	}
 	
 }
